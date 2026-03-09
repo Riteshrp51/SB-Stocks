@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+}
+
+:root {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  background-color: #f8fafc;
+  color: #0f172a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #f8fafc;
+}
+
+#root {
+  width: 100%;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 selection:bg-primary-500/10 selection:text-primary-900;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+  }
+
+  /* Focus ring styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500/50 ring-offset-4 ring-offset-white transition-all;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] transition-all duration-500;
+  }
+
+  .glass-card:hover {
+    @apply border-primary-500/20 shadow-[0_8px_30px_rgb(0, 0, 0, 0.08)];
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden bg-primary-600 hover:bg-primary-500 text-white font-black uppercase tracking-widest text-xs py-4 px-8 rounded-2xl active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center space-x-2;
+
+    box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.2);
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 font-black uppercase tracking-widest text-xs py-4 px-8 rounded-2xl border border-slate-200 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center space-x-2;
+  }
+
+  .input-field {
+    @apply bg-white border border-slate-200 rounded-2xl py-4 px-6 focus:ring-4 focus:ring-primary-500/5 focus:border-primary-500/50 transition-all outline-none font-medium text-slate-900 placeholder:text-slate-400;
+  }
+
+  .stat-label {
+    @apply text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-1;
+  }
+
+  .stat-value {
+    @apply text-3xl font-black text-slate-900 tracking-tighter;
+  }
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Custom Gradients */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-500;
+}
+
+.bg-mesh {
+  background-image:
+    radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.15) 0px, transparent 50%);
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: transparent;
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
