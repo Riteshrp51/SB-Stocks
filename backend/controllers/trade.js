@@ -109,8 +109,12 @@ exports.sellStock = async (req, res) => {
 
     // Check if user owns enough stock
     const portfolioEntry = await Portfolio.findOne({ user: userId, stockSymbol: symbol.toUpperCase() }).session(session);
-    if (!portfolioEntry || portfolioEntry.quantity < quantity) {
-      throw new Error('Not enough shares to sell');
+    if (!portfolioEntry) {
+      throw new Error(`Asset not found in portfolio: ${symbol}`);
+    }
+
+    if (portfolioEntry.quantity < quantity) {
+      throw new Error(`Insufficient volume. Available: ${portfolioEntry.quantity}, Requested: ${quantity}`);
     }
 
     // Get current price from stock service
@@ -128,7 +132,7 @@ exports.sellStock = async (req, res) => {
     if (!user) {
       throw new Error('User not found');
     }
-    
+
     user.balance += totalProceeds;
     await user.save({ session });
 

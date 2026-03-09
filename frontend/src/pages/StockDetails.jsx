@@ -374,7 +374,17 @@ const StockDetails = () => {
 
             <div className="space-y-10">
               <div className="space-y-4">
-                <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2">Unit Volume</label>
+                <div className="flex justify-between items-end ml-2">
+                  <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Unit Volume</label>
+                  {portfolioEntry && (
+                    <button
+                      onClick={() => setQuantity(portfolioEntry.quantity)}
+                      className="text-[10px] font-black text-primary-500 uppercase tracking-[0.2em] hover:text-primary-600 transition-colors"
+                    >
+                      Max: {portfolioEntry.quantity}
+                    </button>
+                  )}
+                </div>
                 <div className="flex items-center bg-slate-50 border border-slate-200 rounded-[28px] p-3 group-focus-within:border-emerald-500/50 transition-all shadow-sm">
                   <button
                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
@@ -423,18 +433,27 @@ const StockDetails = () => {
                     </>
                   )}
                 </button>
-                <button
-                  onClick={() => handleTrade('sell')}
-                  disabled={trading || !portfolioEntry || quantity > portfolioEntry.quantity}
-                  className="bg-red-600 hover:bg-red-500 text-white py-6 rounded-[32px] font-black text-lg shadow-[0_20px_40px_rgba(239,68,68,0.2)] transition-all active:scale-[0.98] flex items-center justify-center space-x-4 disabled:opacity-50 disabled:cursor-not-allowed group/sell"
-                >
-                  {trading ? <Loader2 className="animate-spin" size={28} strokeWidth={3} /> : (
-                    <>
-                      <TrendingDown size={22} className="group-hover/sell:-translate-y-1 transition-transform" />
-                      <span className="tracking-[0.1em]">SELL STOCK</span>
-                    </>
-                  )}
-                </button>
+                {portfolioEntry && (
+                  <div className="space-y-4">
+                    <button
+                      onClick={() => handleTrade('sell')}
+                      disabled={trading || quantity > portfolioEntry.quantity}
+                      className="w-full bg-red-600 hover:bg-red-500 text-white py-6 rounded-[32px] font-black text-lg shadow-[0_20px_40px_rgba(239,68,68,0.2)] transition-all active:scale-[0.98] flex items-center justify-center space-x-4 disabled:opacity-50 disabled:cursor-not-allowed group/sell"
+                    >
+                      {trading ? <Loader2 className="animate-spin" size={28} strokeWidth={3} /> : (
+                        <>
+                          <TrendingDown size={22} className="group-hover/sell:-translate-y-1 transition-transform" />
+                          <span className="tracking-[0.1em]">SELL STOCK</span>
+                        </>
+                      )}
+                    </button>
+                    {quantity > portfolioEntry.quantity && (
+                      <p className="text-red-500 text-[10px] font-black uppercase tracking-widest text-center animate-pulse">
+                        Insufficient Volume: Only {portfolioEntry.quantity} units available
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="text-center bg-white p-6 rounded-[32px] border border-slate-200 shadow-sm">

@@ -67,11 +67,11 @@ body {
 
 @layer components {
   .glass-card {
-    @apply bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0, 0, 0, 0.04)] transition-all duration-500;
+    @apply bg-white border border-slate-200 shadow-lg transition-all duration-500;
   }
 
   .glass-card:hover {
-    @apply border-primary-500/20 shadow-[0_8px_30px_rgb(0, 0, 0, 0.08)];
+    @apply border-primary-500/20 shadow-xl;
   }
 
   .btn-primary {
