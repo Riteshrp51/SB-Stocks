@@ -66,8 +66,8 @@ const Portfolio = () => {
             <Activity size={18} />
             <span>Executive Portfolio Overview</span>
           </h3>
-          <h1 className="text-7xl font-black text-slate-900 tracking-tighter leading-none">
-            ASSET <span className="text-slate-200 text-outline">MATRIX</span>
+          <h1 className="text-7xl font-black text-white tracking-tighter leading-none">
+            ASSET MATRIX
           </h1>
         </div>
 

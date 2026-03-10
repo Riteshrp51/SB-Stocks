@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import API from '../services/api';
 import { useSocket } from '../context/SocketContext';
 import {
@@ -100,7 +100,7 @@ const Watchlist = () => {
             <span>Active Asset Surveillance</span>
           </h3>
           <h1 className="text-7xl font-black text-white tracking-tighter leading-none">
-            WATCH <span className="text-slate-800 text-outline">TERMINAL</span>
+            WATCHLIST
           </h1>
         </div>
 
